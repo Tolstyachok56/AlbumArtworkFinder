@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Album {
+final class Album {
     var collectionName: String?
     var artistName: String?
     var trackCount: Int?

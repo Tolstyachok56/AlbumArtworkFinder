@@ -51,7 +51,7 @@ class SearchViewController: UIViewController {
     
     //MARK: - Configuring Collection View
     
-    func configureCollectionView() {
+    private func configureCollectionView() {
         let screenWidth = Int(UIScreen.main.bounds.width)
         let itemSize = screenWidth / (screenWidth / 100) - 1
         let layout = UICollectionViewFlowLayout()
@@ -63,7 +63,7 @@ class SearchViewController: UIViewController {
     
     //MARK: - Keyboard dismissial
     
-    @objc func dismissKeyboard() {
+    @objc private func dismissKeyboard() {
         searchBar.resignFirstResponder()
     }
     
@@ -79,12 +79,12 @@ class SearchViewController: UIViewController {
     
     //MARK: - Networking
     
-    enum RequestType: String {
+    private enum RequestType: String {
         case search = "https://itunes.apple.com/search?media=music&entity=album&"
         case lookup = "https://itunes.apple.com/lookup?media=music&entity=song&"
     }
     
-    func createRequest(ofType type: RequestType, parameterKey key: String, parameterValue: String) {
+    private func createRequest(ofType type: RequestType, parameterKey key: String, parameterValue: String) {
         if dataTask != nil {
             dataTask?.cancel()
         }
@@ -117,7 +117,7 @@ class SearchViewController: UIViewController {
     
     //MARK: - Handling request results
     
-    func parseJSON(data: Data?, completion: ([String:AnyObject]) -> Void) {
+    private func parseJSON(data: Data?, completion: ([String:AnyObject]) -> Void) {
         do {
             if let data = data,
                 let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] {
@@ -141,7 +141,7 @@ class SearchViewController: UIViewController {
         }
     }
     
-    func updateSearhResults(_ data: Data?) {
+    private func updateSearhResults(_ data: Data?) {
         searchResults.removeAll()
         
         parseJSON(data: data) { (albumDictionary) in
@@ -154,7 +154,7 @@ class SearchViewController: UIViewController {
         }
     }
     
-    func updateAlbumDetailInfo(_ data: Data?) {
+    private func updateAlbumDetailInfo(_ data: Data?) {
         var album = Album()
         
         parseJSON(data: data) { (albumDictionary) in

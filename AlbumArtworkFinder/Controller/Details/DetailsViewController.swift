@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Foundation
 
 class DetailsViewController: UIViewController {
     
@@ -18,16 +17,18 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var numberOfTracksLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
     
-    @IBOutlet weak var tableView: UITableView!
-    
     var album: Album?
+    
+    //MARK: - View controller methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUIWithAlbumData()
     }
     
-    func updateUIWithAlbumData() {
+    //MARK: - Updating UI with album data
+    
+    private func updateUIWithAlbumData() {
         albumNameLabel.text = album?.collectionName
         artistNameLabel.text = album?.artistName
         numberOfTracksLabel.text = "\((album?.trackCount!)!) tracks"
@@ -46,6 +47,8 @@ class DetailsViewController: UIViewController {
     
 }
 
+//MARK: - UITableViewDataSource
+
 extension DetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (album?.trackNames.count)!
@@ -58,6 +61,5 @@ extension DetailsViewController: UITableViewDataSource {
         cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
         return cell
     }
-    
     
 }

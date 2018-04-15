@@ -205,7 +205,6 @@
                         <outlet property="genreLabel" destination="aTC-RU-P7e" id="L9X-90-kFd"/>
                         <outlet property="numberOfTracksLabel" destination="Dnq-iV-Ktz" id="tF0-m3-TQq"/>
                         <outlet property="releaseDateLabel" destination="Ns6-jH-nqx" id="LtA-qs-nuC"/>
-                        <outlet property="tableView" destination="q0q-Hb-P15" id="eHG-SU-o4T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s3E-yy-LzS" userLabel="First Responder" sceneMemberID="firstResponder"/>
