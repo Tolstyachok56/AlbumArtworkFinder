@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class SearchViewController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
@@ -85,15 +86,12 @@ class SearchViewController: UIViewController {
     
     //MARK: - Networking
     
-    private enum RequestType: String {
-        case search = "https://itunes.apple.com/search?media=music&entity=album&"
-        case lookup = "https://itunes.apple.com/lookup?media=music&entity=song&"
-    }
-    
     private func createRequest(ofType type: RequestType, parameterKey key: String, parameterValue: String) {
+        
         if dataTask != nil {
             dataTask?.cancel()
         }
+        
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.activityIndicator.startAnimating()
         
@@ -120,35 +118,30 @@ class SearchViewController: UIViewController {
         dataTask?.resume()
     }
     
-    //MARK: - Handling request results
+    //MARK: - Parsing JSON
     
-    private func parseJSON(data: Data?, completion: ([String:AnyObject]) -> Void) {
+    private func parseJSON<T:Decodable>(data: Data?, responseType: T.Type, completion: (T) -> Void) {
         do {
-            if let data = data,
-                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] {
-                
-                if let array: AnyObject = json["results"] {
-                    for dictionary in array as! [AnyObject] {
-                        if let albumDictionary = dictionary as? [String:AnyObject] {
-                            completion(albumDictionary)
-                        } else {
-                            print("Not a dictionary")
-                        }
-                    }
-                } else {
-                    print("Results key not found in dictionary")
-                }
+            if let data = data{
+                let json = try JSONDecoder().decode(T.self, from: data)
+                completion(json)
             }
         } catch let jsonErr {
             print("Parsing error: \(jsonErr.localizedDescription)")
         }
     }
     
+    //MARK: - Handling request results
+    
     private func updateSearhResults(_ data: Data?) {
         searchResults.removeAll()
         
-        parseJSON(data: data) { (albumDictionary) in
-            searchResults.append(SearchResult(dict: albumDictionary))
+        parseJSON(data: data, responseType: SearchResponse.self) { (json) in
+            if let results = json.results {
+                for result in results {
+                    searchResults.append(result)
+                }
+            }
         }
         
         DispatchQueue.main.async {
@@ -160,12 +153,14 @@ class SearchViewController: UIViewController {
     private func updateAlbumDetailInfo(_ data: Data?) {
         var album = Album()
         
-        parseJSON(data: data) { (albumDictionary) in
-            if let wrapperType = albumDictionary["wrapperType"] as? String{
-                if wrapperType == "collection" {
-                    album = Album(dict: albumDictionary)
-                } else if wrapperType == "track" {
-                    album.trackNames.append(albumDictionary["trackName"] as? String)
+        parseJSON(data: data, responseType: LookupResponse.self) { (json) in
+            if let results = json.results {
+                for result in results {
+                    if result.wrapperType == "collection" {
+                        album = Album(json: result)
+                    } else if result.wrapperType == "track" {
+                        album.trackNames.append(result.trackName)
+                    }
                 }
             }
         }
@@ -208,7 +203,6 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
 }
-
 
 //MARK: - UICollectionViewDataSource
 

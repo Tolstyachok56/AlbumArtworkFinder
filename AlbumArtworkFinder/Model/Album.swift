@@ -20,16 +20,16 @@ struct Album {
     
     init() {}
     
-    init(dict: [String: AnyObject]) {
-        self.collectionName = dict["collectionName"] as? String
-        self.artistName = dict["artistName"] as? String
-        self.trackCount = dict["trackCount"] as? Int
-        self.primaryGenreName = dict["primaryGenreName"] as? String
-        self.artworkUrl100 = dict["artworkUrl100"] as? String
+    init(json: LookupResult) {
+        self.collectionName = json.collectionName
+        self.artistName = json.artistName
+        self.trackCount = json.trackCount
+        self.primaryGenreName = json.primaryGenreName
+        self.artworkUrl100 = json.artworkUrl100
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd'T'hh:mm:ss'Z'"
-        let parsedReleaseDate = dict["releaseDate"] as? String
+        let parsedReleaseDate = json.releaseDate
         let releaseDateObj = dateFormatter.date(from: parsedReleaseDate!)
         dateFormatter.dateFormat = "MMM dd, YYYY"
         dateFormatter.locale = Locale(identifier: "en_US")
@@ -37,3 +37,5 @@ struct Album {
     }
 
 }
+
+
