@@ -43,8 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     fileprivate func configureAppAppearance(_ application: UIApplication) {
         
-        application.statusBarStyle = .lightContent
-        
         let navigationBarAppearance = UINavigationBar.appearance()
         navigationBarAppearance.setBackgroundImage(UIImage(), for: .default)
         navigationBarAppearance.shadowImage = UIImage()
