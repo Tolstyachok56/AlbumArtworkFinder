@@ -131,7 +131,7 @@ class SearchViewController: UIViewController {
                 } else {
                     print("Results key not found in dictionary")
                 }
-            } 
+            }
         } catch let jsonErr {
             print("Parsing error: \(jsonErr.localizedDescription)")
         }
