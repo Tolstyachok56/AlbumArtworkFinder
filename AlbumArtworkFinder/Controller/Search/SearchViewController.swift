@@ -34,12 +34,12 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        issueLabel.isHidden = true
-        configureCollectionView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
+        issueLabel.isHidden = true
+        configureCollectionView()
         super.viewWillAppear(true)
     }
     
@@ -87,7 +87,7 @@ class SearchViewController: UIViewController {
     
     //MARK: - Networking
     
-    private func createRequest(ofType type: RequestType, parameterKey key: String, parameterValue: String) {
+    private func createRequest(ofType type: RequestType, paramKey key: String, paramValue: String) {
         
         if dataTask != nil {
             dataTask?.cancel()
@@ -97,7 +97,7 @@ class SearchViewController: UIViewController {
         issueLabel.isHidden = true
         self.activityIndicator.startAnimating()
         
-        let value = parameterValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let value = paramValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let url = URL(string: "\(type.rawValue)\(key)=\(value)")
         dataTask = URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
             DispatchQueue.main.async {
@@ -193,7 +193,7 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         dismissKeyboard()
         if searchBar.text != "" {
-            createRequest(ofType: .search, parameterKey: "term", parameterValue: searchBar.text!)
+            createRequest(ofType: .search, paramKey: "term", paramValue: searchBar.text!)
         }
     }
     
@@ -241,7 +241,7 @@ extension SearchViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedSearchResult = sortedSearchResults[indexPath.item]
-        createRequest(ofType: .lookup, parameterKey: "id", parameterValue: String(describing: selectedSearchResult.collectionId!))
+        createRequest(ofType: .lookup, paramKey: "id", paramValue: String(describing: selectedSearchResult.collectionId!))
     }
     
 }
