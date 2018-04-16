@@ -75,77 +75,48 @@ class SearchViewController: UIViewController {
         searchBar.resignFirstResponder()
     }
     
-    //MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toAlbumInfo",
-            let destination = segue.destination as? DetailsViewController,
-            let sender = sender as? Album {
-            destination.album = sender
-        }
-    }
-    
     //MARK: - Networking
     
-    private func createRequest(ofType type: RequestType, paramKey key: String, paramValue: String) {
+    private func startRequest(requestType: RequestType, paramKey key: String, paramValue value: String) {
         
         if dataTask != nil {
             dataTask?.cancel()
         }
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         issueLabel.isHidden = true
         self.activityIndicator.startAnimating()
         
-        let value = paramValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        let url = URL(string: "\(type.rawValue)\(key)=\(value)")
-        dataTask = URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-            DispatchQueue.main.async {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            }
-            if let error = error {
-                DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating()
-                    self.issueLabel.isHidden = false
-                    self.issueLabel.text = "Connection issues"
-                    self.searchResults.removeAll()
-                    self.collectionView.reloadData()
-                }
-                print(error.localizedDescription)
-            } else if let httpResponse = response as? HTTPURLResponse {
-                if httpResponse.statusCode == 200 {
-                    switch type {
-                    case .search:
-                        self.updateSearhResults(data)
-                    case .lookup:
-                        self.updateAlbumDetailInfo(data)
-                    }
-                }
-            }
-            
-        })
+        NetworkService.configureSessionDataTask(dataTask: &dataTask, requestType: requestType, paramKey: key, paramValue: value,
+                                 errorHandler: { (error) in self.handleDataTaskError(error) },
+                                 responseHandler: { (requestType, data) in self.handleDataTaskResponse(requestType: requestType, data: data!) }
+        )
         dataTask?.resume()
     }
     
-    //MARK: - Parsing JSON
     
-    private func parseJSON<T:Decodable>(data: Data?, responseType: T.Type, completion: (T) -> Void) {
-        do {
-            if let data = data{
-                let json = try JSONDecoder().decode(T.self, from: data)
-                completion(json)
-            }
-        } catch let jsonErr {
-            print("Parsing error: \(jsonErr.localizedDescription)")
-        }
+
+    //MARK: - Handling networking results
+    
+    private func handleDataTaskError(_ error: Error) {
+        self.activityIndicator.stopAnimating()
+        self.issueLabel.isHidden = false
+        self.issueLabel.text = error.localizedDescription
+        self.searchResults.removeAll()
+        self.collectionView.reloadData()
     }
     
-    //MARK: - Handling request results
+    private func handleDataTaskResponse(requestType: RequestType, data: Data) {
+        if requestType == .search {
+            updateSearhResults(data)
+        } else if requestType == .lookup {
+            updateAlbumDetailInfo(data)
+        }
+    }
     
     private func updateSearhResults(_ data: Data?) {
         searchResults.removeAll()
         
-        parseJSON(data: data, responseType: SearchResponse.self) { (json) in
+        ParseService.parseJSON(data: data, responseType: SearchResponse.self) { (json) in
             if let results = json.results {
                 for result in results {
                     searchResults.append(result)
@@ -166,7 +137,7 @@ class SearchViewController: UIViewController {
     private func updateAlbumDetailInfo(_ data: Data?) {
         var album = Album()
         
-        parseJSON(data: data, responseType: LookupResponse.self) { (json) in
+        ParseService.parseJSON(data: data, responseType: LookupResponse.self) { (json) in
             if let results = json.results {
                 for result in results {
                     if result.wrapperType == "collection" {
@@ -179,12 +150,23 @@ class SearchViewController: UIViewController {
         }
         
         DispatchQueue.main.async {
-            self.performSegue(withIdentifier: "toAlbumInfo", sender: album)
+            self.performSegue(withIdentifier: Id.albumDetailsSegueID, sender: album)
             self.activityIndicator.stopAnimating()
         }
     }
     
+    //MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Id.albumDetailsSegueID,
+            let destination = segue.destination as? DetailsViewController,
+            let sender = sender as? Album {
+            destination.album = sender
+        }
+    }
+    
 }
+
 
 //MARK: - UISearchBarDelegate
 
@@ -193,7 +175,7 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         dismissKeyboard()
         if searchBar.text != "" {
-            createRequest(ofType: .search, paramKey: "term", paramValue: searchBar.text!)
+            startRequest(requestType: .search, paramKey: "term", paramValue: searchBar.text!)
         }
     }
     
@@ -226,7 +208,7 @@ extension SearchViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "resultCell", for: indexPath) as? ResultCollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Id.resultCollectionViewCellID, for: indexPath) as? ResultCollectionViewCell {
             cell.album = sortedSearchResults[indexPath.item]
             return cell
         }
@@ -241,7 +223,8 @@ extension SearchViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedSearchResult = sortedSearchResults[indexPath.item]
-        createRequest(ofType: .lookup, paramKey: "id", paramValue: String(describing: selectedSearchResult.collectionId!))
+        let collectionID = String(describing: selectedSearchResult.collectionId!)
+        startRequest(requestType: .lookup, paramKey: "id", paramValue: collectionID)
     }
     
 }
