@@ -12,7 +12,7 @@ class ResultCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var artworkImageView: UIImageView!
     
-    var album: SearchForAlbumResult? {
+    var album: SearchResult? {
         didSet {
             if let artworkUrl = album?.artworkUrl100,
                 let url = URL(string: artworkUrl) {

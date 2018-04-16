@@ -14,14 +14,13 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var searchResults = [SearchForAlbumResult]()
-    var sortedSearchResults: [SearchForAlbumResult] {
+    var searchResults = [SearchResult]()
+    var sortedSearchResults: [SearchResult] {
         get {
             return searchResults.sorted(by: {$0.collectionName!.lowercased() < $1.collectionName!.lowercased()})
         }
     }
     
-    var urlSession = URLSession(configuration: .default)
     var dataTask: URLSessionDataTask?
     
     lazy var tapRecongnizer: UITapGestureRecognizer = {
@@ -93,7 +92,7 @@ class SearchViewController: UIViewController {
         
         let value = parameterValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let url = URL(string: "\(type.rawValue)\(key)=\(value)")
-        dataTask = urlSession.dataTask(with: url!, completionHandler: { (data, response, error) in
+        dataTask = URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
             DispatchQueue.main.async {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
             }
@@ -111,7 +110,6 @@ class SearchViewController: UIViewController {
             }
             
         })
-        
         dataTask?.resume()
     }
     
@@ -133,11 +131,9 @@ class SearchViewController: UIViewController {
                 } else {
                     print("Results key not found in dictionary")
                 }
-            } else {
-                print("JSON error")
-            }
-        } catch let error {
-            print("Parsing error: \(error.localizedDescription)")
+            } 
+        } catch let jsonErr {
+            print("Parsing error: \(jsonErr.localizedDescription)")
         }
     }
     
@@ -145,7 +141,7 @@ class SearchViewController: UIViewController {
         searchResults.removeAll()
         
         parseJSON(data: data) { (albumDictionary) in
-            searchResults.append(SearchForAlbumResult(dict: albumDictionary))
+            searchResults.append(SearchResult(dict: albumDictionary))
         }
         
         DispatchQueue.main.async {
@@ -195,6 +191,13 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         view.removeGestureRecognizer(tapRecongnizer)
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" && dataTask != nil {
+            dataTask?.cancel()
+        }
+    }
+    
 }
 
 

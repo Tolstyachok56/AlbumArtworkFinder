@@ -32,6 +32,7 @@ final class Album {
         let parsedReleaseDate = dict["releaseDate"] as? String
         let releaseDateObj = dateFormatter.date(from: parsedReleaseDate!)
         dateFormatter.dateFormat = "MMM dd, YYYY"
+        dateFormatter.locale = Locale(identifier: "en_US")
         self.releaseDate = dateFormatter.string(from: releaseDateObj!)
     }
 

@@ -12,7 +12,7 @@
 		040BC565207FC344006C284F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 040BC563207FC344006C284F /* Main.storyboard */; };
 		040BC567207FC346006C284F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040BC566207FC346006C284F /* Assets.xcassets */; };
 		040BC56A207FC346006C284F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 040BC568207FC346006C284F /* LaunchScreen.storyboard */; };
-		040BC575207FC939006C284F /* SearchForAlbumResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040BC574207FC939006C284F /* SearchForAlbumResult.swift */; };
+		040BC575207FC939006C284F /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040BC574207FC939006C284F /* SearchResult.swift */; };
 		040BC57720809ABD006C284F /* ResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040BC57620809ABD006C284F /* ResultCollectionViewCell.swift */; };
 		04272D792080F30700EC8186 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04272D782080F30700EC8186 /* Album.swift */; };
 		04272D7B2081065B00EC8186 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04272D7A2081065B00EC8186 /* DetailsViewController.swift */; };
@@ -26,7 +26,7 @@
 		040BC566207FC346006C284F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		040BC569207FC346006C284F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		040BC56B207FC346006C284F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		040BC574207FC939006C284F /* SearchForAlbumResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchForAlbumResult.swift; sourceTree = "<group>"; };
+		040BC574207FC939006C284F /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		040BC57620809ABD006C284F /* ResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		04272D782080F30700EC8186 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		04272D7A2081065B00EC8186 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
@@ -85,7 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				04272D7C2081098800EC8186 /* Search */,
-				04272D7D2081099600EC8186 /* Details */,
+				04272D7D2081099600EC8186 /* Album Details */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -93,7 +93,7 @@
 		040BC573207FC900006C284F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				040BC574207FC939006C284F /* SearchForAlbumResult.swift */,
+				040BC574207FC939006C284F /* SearchResult.swift */,
 				04272D782080F30700EC8186 /* Album.swift */,
 			);
 			path = Model;
@@ -108,12 +108,12 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
-		04272D7D2081099600EC8186 /* Details */ = {
+		04272D7D2081099600EC8186 /* Album Details */ = {
 			isa = PBXGroup;
 			children = (
 				04272D7A2081065B00EC8186 /* DetailsViewController.swift */,
 			);
-			path = Details;
+			path = "Album Details";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,7 +190,7 @@
 				04272D7B2081065B00EC8186 /* DetailsViewController.swift in Sources */,
 				040BC562207FC344006C284F /* SearchViewController.swift in Sources */,
 				040BC560207FC344006C284F /* AppDelegate.swift in Sources */,
-				040BC575207FC939006C284F /* SearchForAlbumResult.swift in Sources */,
+				040BC575207FC939006C284F /* SearchResult.swift in Sources */,
 				040BC57720809ABD006C284F /* ResultCollectionViewCell.swift in Sources */,
 				04272D792080F30700EC8186 /* Album.swift in Sources */,
 			);
