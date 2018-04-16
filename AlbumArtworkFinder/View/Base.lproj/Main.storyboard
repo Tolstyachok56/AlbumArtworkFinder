@@ -126,31 +126,31 @@
                                 <rect key="frame" x="140" y="64" width="234.5" height="140"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collection Name" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ioy-Le-jF7">
-                                        <rect key="frame" x="0.0" y="20" width="234.5" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="20" width="214.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZF3-Qq-fYr">
-                                        <rect key="frame" x="0.0" y="40.5" width="234.5" height="18"/>
+                                        <rect key="frame" x="0.0" y="40.5" width="214.5" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genre" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aTC-RU-P7e">
-                                        <rect key="frame" x="0.0" y="84" width="234.5" height="12"/>
+                                        <rect key="frame" x="0.0" y="84" width="214.5" height="12"/>
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="10"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of songs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dnq-iV-Ktz">
-                                        <rect key="frame" x="0.0" y="96" width="234.5" height="12"/>
+                                        <rect key="frame" x="0.0" y="96" width="214.5" height="12"/>
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="10"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Release:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ns6-jH-nqx">
-                                        <rect key="frame" x="0.0" y="108" width="234.5" height="12"/>
+                                        <rect key="frame" x="0.0" y="108" width="214.5" height="12"/>
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="10"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -158,10 +158,10 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Ioy-Le-jF7" firstAttribute="leading" secondItem="Vcx-E0-HNL" secondAttribute="leading" id="7zo-fy-Odg"/>
-                                    <constraint firstAttribute="trailing" secondItem="aTC-RU-P7e" secondAttribute="trailing" id="BH7-e6-u1k"/>
-                                    <constraint firstAttribute="trailing" secondItem="Ns6-jH-nqx" secondAttribute="trailing" id="EFY-zK-oQy"/>
+                                    <constraint firstAttribute="trailing" secondItem="aTC-RU-P7e" secondAttribute="trailing" constant="20" id="BH7-e6-u1k"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ns6-jH-nqx" secondAttribute="trailing" constant="20" id="EFY-zK-oQy"/>
                                     <constraint firstItem="Ns6-jH-nqx" firstAttribute="top" secondItem="Dnq-iV-Ktz" secondAttribute="bottom" id="Fgu-rM-rly"/>
-                                    <constraint firstAttribute="trailing" secondItem="ZF3-Qq-fYr" secondAttribute="trailing" id="GkS-Bt-fJ8"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZF3-Qq-fYr" secondAttribute="trailing" constant="20" id="GkS-Bt-fJ8"/>
                                     <constraint firstItem="Dnq-iV-Ktz" firstAttribute="leading" secondItem="Vcx-E0-HNL" secondAttribute="leading" id="JRX-Vb-Oki"/>
                                     <constraint firstAttribute="bottom" secondItem="Ns6-jH-nqx" secondAttribute="bottom" constant="20" id="O22-lM-8bk"/>
                                     <constraint firstItem="ZF3-Qq-fYr" firstAttribute="leading" secondItem="Vcx-E0-HNL" secondAttribute="leading" id="PFN-ZK-0JN"/>
@@ -170,8 +170,8 @@
                                     <constraint firstItem="Ioy-Le-jF7" firstAttribute="top" secondItem="Vcx-E0-HNL" secondAttribute="top" constant="20" id="c8a-Zi-eDh"/>
                                     <constraint firstItem="aTC-RU-P7e" firstAttribute="leading" secondItem="Vcx-E0-HNL" secondAttribute="leading" id="fBg-89-nxU"/>
                                     <constraint firstItem="ZF3-Qq-fYr" firstAttribute="top" secondItem="Ioy-Le-jF7" secondAttribute="bottom" id="fR8-Lm-BNa"/>
-                                    <constraint firstAttribute="trailing" secondItem="Dnq-iV-Ktz" secondAttribute="trailing" id="ibq-cz-ulY"/>
-                                    <constraint firstAttribute="trailing" secondItem="Ioy-Le-jF7" secondAttribute="trailing" id="nek-fo-y9R"/>
+                                    <constraint firstAttribute="trailing" secondItem="Dnq-iV-Ktz" secondAttribute="trailing" constant="20" id="ibq-cz-ulY"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ioy-Le-jF7" secondAttribute="trailing" constant="20" id="nek-fo-y9R"/>
                                     <constraint firstItem="Dnq-iV-Ktz" firstAttribute="top" secondItem="aTC-RU-P7e" secondAttribute="bottom" id="v5O-Uq-ey8"/>
                                 </constraints>
                             </view>
