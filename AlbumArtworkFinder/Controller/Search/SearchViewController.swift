@@ -13,6 +13,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var issueLabel: UILabel!
     
     var searchResults = [SearchResult]()
     var sortedSearchResults: [SearchResult] {
@@ -33,6 +34,7 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        issueLabel.isHidden = true
         configureCollectionView()
     }
     
@@ -92,6 +94,7 @@ class SearchViewController: UIViewController {
         }
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        issueLabel.isHidden = true
         self.activityIndicator.startAnimating()
         
         let value = parameterValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
@@ -101,6 +104,13 @@ class SearchViewController: UIViewController {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
             }
             if let error = error {
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    self.issueLabel.isHidden = false
+                    self.issueLabel.text = "Connection issues"
+                    self.searchResults.removeAll()
+                    self.collectionView.reloadData()
+                }
                 print(error.localizedDescription)
             } else if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode == 200 {
@@ -146,6 +156,10 @@ class SearchViewController: UIViewController {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
             self.activityIndicator.stopAnimating()
+            if self.searchResults.isEmpty {
+                self.issueLabel.isHidden = false
+                self.issueLabel.text = "Nothing found"
+            }
         }
     }
     

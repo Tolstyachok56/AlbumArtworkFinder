@@ -66,6 +66,12 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="FPf-r7-nhj"/>
                                 </connections>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aB3-DX-R0v">
+                                <rect key="frame" x="188.66666666666666" y="150" width="37.333333333333343" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="YC5-0T-VjE">
                                 <rect key="frame" x="188.66666666666666" y="349.66666666666669" width="37" height="37"/>
                             </activityIndicatorView>
@@ -73,8 +79,10 @@
                         <color key="backgroundColor" red="0.65092881568898009" green="0.75513918662509094" blue="0.96620899438858032" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="lz6-ZP-oPr" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="0no-ox-XuJ"/>
+                            <constraint firstItem="aB3-DX-R0v" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6Op-De-WaL"/>
                             <constraint firstItem="lz6-ZP-oPr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="B5R-kA-YCQ"/>
                             <constraint firstItem="cqe-oB-bKO" firstAttribute="top" secondItem="lz6-ZP-oPr" secondAttribute="bottom" id="BFX-FV-nV4"/>
+                            <constraint firstItem="aB3-DX-R0v" firstAttribute="top" secondItem="lz6-ZP-oPr" secondAttribute="bottom" constant="30" id="Dcc-ds-Dwp"/>
                             <constraint firstItem="cqe-oB-bKO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="GNV-Zz-Xld"/>
                             <constraint firstItem="YC5-0T-VjE" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="QbW-cU-ruj"/>
                             <constraint firstItem="YC5-0T-VjE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dh2-E4-cwt"/>
@@ -88,6 +96,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="YC5-0T-VjE" id="fgO-zt-gUU"/>
                         <outlet property="collectionView" destination="cqe-oB-bKO" id="pvS-17-Kjh"/>
+                        <outlet property="issueLabel" destination="aB3-DX-R0v" id="cVO-RY-IbZ"/>
                         <outlet property="searchBar" destination="lz6-ZP-oPr" id="x6e-FC-1JB"/>
                         <segue destination="OWs-C3-3my" kind="show" identifier="toAlbumInfo" id="Vrl-PF-3Zb"/>
                     </connections>
