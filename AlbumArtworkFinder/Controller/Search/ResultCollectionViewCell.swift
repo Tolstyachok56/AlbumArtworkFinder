@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ResultCollectionViewCell: UICollectionViewCell {
     
@@ -14,13 +15,12 @@ class ResultCollectionViewCell: UICollectionViewCell {
     
     var album: SearchResult? {
         didSet {
-            if let artworkUrl = album?.artworkUrl100,
-                let url = URL(string: artworkUrl) {
-                let data = try? Data(contentsOf: url)
-                artworkImageView.image = UIImage(data: data!)
+            artworkImageView.backgroundColor = .gray
+            if let imageUrl = album?.artworkUrl100 {
+                let url = URL(string: imageUrl)
+                artworkImageView.sd_setImage(with: url!, placeholderImage: UIImage())
             } else {
                 artworkImageView.image = UIImage()
-                artworkImageView.backgroundColor = .gray
             }
         }
     }

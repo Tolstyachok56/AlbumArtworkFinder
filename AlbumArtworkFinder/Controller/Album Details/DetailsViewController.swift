@@ -35,13 +35,11 @@ class DetailsViewController: UIViewController {
         genreLabel.text = album?.primaryGenreName
         releaseDateLabel.text = album?.releaseDate
         
+        albumImageView.backgroundColor = .gray
         if let artwork = album?.artworkUrl100 {
-            let data = try? Data(contentsOf: URL(string: artwork)!)
-            albumImageView.image = UIImage(data: data!)
+            albumImageView.sd_setImage(with: URL(string: artwork)!, placeholderImage: UIImage())
         } else {
             albumImageView.image = UIImage()
-            albumImageView.backgroundColor = .gray
-            albumImageView.frame.size = CGSize(width: 100, height: 100)
         }
     }
     

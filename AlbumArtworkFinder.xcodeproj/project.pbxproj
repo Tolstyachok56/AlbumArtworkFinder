@@ -16,6 +16,7 @@
 		040BC57720809ABD006C284F /* ResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040BC57620809ABD006C284F /* ResultCollectionViewCell.swift */; };
 		04272D792080F30700EC8186 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04272D782080F30700EC8186 /* Album.swift */; };
 		04272D7B2081065B00EC8186 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04272D7A2081065B00EC8186 /* DetailsViewController.swift */; };
+		E16EFE15E2269285062B6651 /* Pods_AlbumArtworkFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA203123FA1E66DCBC93BEE /* Pods_AlbumArtworkFinder.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,9 @@
 		040BC57620809ABD006C284F /* ResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		04272D782080F30700EC8186 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		04272D7A2081065B00EC8186 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		42958278F6A1033D2655D747 /* Pods-AlbumArtworkFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlbumArtworkFinder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlbumArtworkFinder/Pods-AlbumArtworkFinder.debug.xcconfig"; sourceTree = "<group>"; };
+		C0772DC1C7AAB7F3939250FF /* Pods-AlbumArtworkFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlbumArtworkFinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlbumArtworkFinder/Pods-AlbumArtworkFinder.release.xcconfig"; sourceTree = "<group>"; };
+		FAA203123FA1E66DCBC93BEE /* Pods_AlbumArtworkFinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlbumArtworkFinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E16EFE15E2269285062B6651 /* Pods_AlbumArtworkFinder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +53,8 @@
 			children = (
 				040BC55E207FC344006C284F /* AlbumArtworkFinder */,
 				040BC55D207FC344006C284F /* Products */,
+				CE64AACB187FBD91CF12DEAA /* Pods */,
+				403DEE02AAAE822856AA962A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,6 +123,23 @@
 			path = "Album Details";
 			sourceTree = "<group>";
 		};
+		403DEE02AAAE822856AA962A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FAA203123FA1E66DCBC93BEE /* Pods_AlbumArtworkFinder.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE64AACB187FBD91CF12DEAA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				42958278F6A1033D2655D747 /* Pods-AlbumArtworkFinder.debug.xcconfig */,
+				C0772DC1C7AAB7F3939250FF /* Pods-AlbumArtworkFinder.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -123,9 +147,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 040BC56E207FC346006C284F /* Build configuration list for PBXNativeTarget "AlbumArtworkFinder" */;
 			buildPhases = (
+				99B80A1E7E1285285030EE77 /* [CP] Check Pods Manifest.lock */,
 				040BC558207FC344006C284F /* Sources */,
 				040BC559207FC344006C284F /* Frameworks */,
 				040BC55A207FC344006C284F /* Resources */,
+				DC6A22FC24065EC99328501A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -181,6 +207,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		99B80A1E7E1285285030EE77 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AlbumArtworkFinder-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DC6A22FC24065EC99328501A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-AlbumArtworkFinder/Pods-AlbumArtworkFinder-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlbumArtworkFinder/Pods-AlbumArtworkFinder-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		040BC558207FC344006C284F /* Sources */ = {
@@ -334,16 +399,14 @@
 		};
 		040BC56F207FC346006C284F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 42958278F6A1033D2655D747 /* Pods-AlbumArtworkFinder.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9E7V52UM47;
 				INFOPLIST_FILE = AlbumArtworkFinder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vbadisova.AlbumArtworkFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -353,16 +416,14 @@
 		};
 		040BC570207FC346006C284F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0772DC1C7AAB7F3939250FF /* Pods-AlbumArtworkFinder.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9E7V52UM47;
 				INFOPLIST_FILE = AlbumArtworkFinder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vbadisova.AlbumArtworkFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
