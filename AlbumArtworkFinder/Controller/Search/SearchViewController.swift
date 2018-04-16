@@ -48,10 +48,17 @@ class SearchViewController: UIViewController {
         super.viewWillDisappear(true)
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: nil) { (_) in
+            self.configureCollectionView()
+        }
+    }
+    
     //MARK: - Configuring Collection View
     
     private func configureCollectionView() {
-        let screenWidth = Int(UIScreen.main.bounds.width)
+        let screenWidth = Int(view.bounds.width)
         let itemSize = screenWidth / (screenWidth / 100) - 1
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: itemSize, height: itemSize)
@@ -177,7 +184,9 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         dismissKeyboard()
-        createRequest(ofType: .search, parameterKey: "term", parameterValue: searchBar.text!)
+        if searchBar.text != "" {
+            createRequest(ofType: .search, parameterKey: "term", parameterValue: searchBar.text!)
+        }
     }
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {
@@ -229,4 +238,5 @@ extension SearchViewController: UICollectionViewDelegate {
     }
     
 }
+
 
