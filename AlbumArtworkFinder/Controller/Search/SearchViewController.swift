@@ -61,7 +61,7 @@ class SearchViewController: UIViewController {
     
     private func configureCollectionView() {
         let screenWidth = Int(view.bounds.width)
-        let itemSize = screenWidth / (screenWidth / 100) - 1
+        let itemSize = screenWidth / (screenWidth / 100 + 1) - 1
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: itemSize, height: itemSize)
         layout.minimumInteritemSpacing = 1
